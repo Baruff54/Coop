@@ -27,18 +27,21 @@ function validationFormulaire() {
 
 <template>
     <h1>Inscription</h1>
-    <form @submit="validationFormulaire">
+    <form @submit.prevent="validationFormulaire" method="POST">
         <div>
             <label>Email</label>
-            <input class="input-form" v-model="email" type="email" placeholder="email@domain.com">
+            <input class="input-form" v-model="member.email" type="email" placeholder="email@domain.com">
         </div>
         <div>
             <label>Nom</label>
-            <input class="input-form" v-model="fullname" type="text" placeholder="Votre nom">
+            <input class="input-form" v-model="member.fullname" type="text" placeholder="Votre nom">
         </div>
         <div>
             <label>Mot de passe</label>
-            <input class="input-form" v-model="password" type="password" placeholder="Votre mot de passe">
+            <input class="input-form" v-model="member.password" type="password" placeholder="Votre mot de passe">
+        </div>
+        <div>
+            <input class="input-form" type="submit" value="Envoyer">
         </div>
     </form>
 </template>
