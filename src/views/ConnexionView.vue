@@ -1,10 +1,13 @@
 <script setup>
 import {useSessionStore} from '@/stores/session.js'
+import Navbar from '../components/Navbar.vue'
+import {useUserStore} from '@/stores/user.js'
 import {ref} from "vue";
 import {useRouter} from 'vue-router';
 const router = useRouter();
 
 const sessionStore = new useSessionStore();
+const userStore = new useUserStore();
 
 let member = reactive({
     email: '',
@@ -26,6 +29,7 @@ function connexion() {
         }
         else {
             sessionStore.setSession(response.member,response.token);
+            userStore.setConnected();
             router.push('/');
         }
     })
@@ -34,6 +38,7 @@ function connexion() {
 </script>
 
 <template>
+    <Navbar />
     <h1>Connexion</h1>
     <form @submit.prevent="connexion" method="POST">
         <div>

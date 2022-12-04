@@ -1,5 +1,6 @@
 <script setup>
 import {useRouter} from 'vue-router';
+import Navbar from '../components/Navbar.vue'
 const router = useRouter();
 
 let member = reactive({
@@ -26,6 +27,7 @@ function validationFormulaire() {
 </script>
 
 <template>
+    <Navbar />
     <h1>Inscription</h1>
     <form @submit.prevent="validationFormulaire" method="POST">
         <div>
