@@ -1,15 +1,26 @@
 <script setup>
 import {useSessionStore} from '@/stores/session.js'
+import {useUserStore} from '@/stores/user.js'
+import {useRouter} from 'vue-router';
 import Membre from '@/components/Membre.vue'
-import Navbar from '../components/Navbar.vue'
+import Navbar from '@/components/Navbar.vue'
 const sessionStore = new useSessionStore();
+const userStore = new useUserStore();
+const router = useRouter();
 
 let members = ref([]);
 
 onMounted(() => {
-    api.get('members?token=' + sessionStore.data.token).then(response => {
-        members.value = response;
-    })
+    if(!userStore.isConnected) {
+        router.push('/signin');
+    }
+    if(sessionStore.isValid())
+    {
+        api.get('members?token=' + sessionStore.data.token).then(response => {
+            members.value = response;
+        })
+    }
+    
 
 })
 </script>

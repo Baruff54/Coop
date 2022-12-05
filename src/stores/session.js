@@ -1,4 +1,7 @@
 import { defineStore } from "pinia";
+import { useUserStore } from "@/stores/user.js";
+import router from "@/router";
+// const userStore = new useUserStore();
 
 export const useSessionStore = defineStore(
   "session",
@@ -13,7 +16,28 @@ export const useSessionStore = defineStore(
       data.token = token;
     }
 
-    return { data, setSession };
+    function isValid() {
+      let token = data.token;
+      // Vérifier qu'il existe un token
+      if (!token) {
+        router.push("/signin");
+        return false;
+      } else {
+        let idUser = data.member.id;
+        // Vérifier que le token est valide
+        api
+          .get("members/" + idUser + "/signedin?token=" + token)
+          .then((response) => {
+            if (!response.token) {
+              router.push("/signin");
+              return false;
+            }
+          });
+        return true;
+      }
+    }
+
+    return { isValid, data, setSession };
   },
   {
     persist: true,
