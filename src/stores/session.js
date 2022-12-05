@@ -24,6 +24,7 @@ export const useSessionStore = defineStore(
         return false;
       } else {
         let idUser = data.member.id;
+
         // Vérifier que le token est valide
         api
           .get("members/" + idUser + "/signedin?token=" + token)

@@ -10,20 +10,25 @@ const router = useRouter();
 function deconnexion() {
 
     let token = sessionStore.data.token
-    
-    api.delete('members/signout?token=' + token).then(response => {
-        if(response.message === 'Utilisateur déconnecté')
-        {
-            sessionStore.setSession(null, null);
-            userStore.disconnect();
-            router.push('/signin');
-        }
-        else
-        {
-            alert(response.message);
-        }
-        
-    })
+    if(!userStore.isConnected) {
+        router.push('/signin');
+    }
+    if(sessionStore.isValid())
+    {
+        api.delete('members/signout?token=' + token).then(response => {
+            if(response.message === 'Utilisateur déconnecté')
+            {
+                sessionStore.setSession(null, null);
+                userStore.disconnect();
+                router.push('/signin');
+            }
+            else
+            {
+                alert(response.message);
+            }
+            
+        })
+    }
     
 }
 </script>
