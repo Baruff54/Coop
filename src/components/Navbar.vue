@@ -8,18 +8,25 @@ const router = useRouter();
 
 
 function deconnexion() {
+
+    let token = {
+        "token": sessionStore.data.token
+    }
     
     api.delete('members/signout', {
-        body: sessionStore.data.token
+        body: token
     }).then(response => {
-        if(response.message) {
-            console.log(response)
-            alert(response.message);
-        }
-        else {
+        if(response.message === 'Utilisateur déconnecté')
+        {
+            localStorage.removeItem('session');
             userStore.disconnect();
             router.push('/signin');
         }
+        else
+        {
+            alert(response.message);
+        }
+        
     })
     
 }
