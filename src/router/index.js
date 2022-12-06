@@ -27,6 +27,12 @@ const router = createRouter({
 
       component: () => import("@/views/MembresView.vue"),
     },
+    {
+      path: "/membres/:id",
+      name: "profilMembre",
+
+      component: () => import("@/views/ProfilMembreView.vue"),
+    },
   ],
 });
 

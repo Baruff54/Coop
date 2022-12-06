@@ -5,11 +5,11 @@ const props = defineProps(['m'])
 <template>
     <div class="membre">
         <div class="membre-information">
-            <h2>{{m.fullname}}</h2>
-            <p>{{m.email}}</p>
+            <h2>{{props.m.fullname}}</h2>
+            <p>{{props.m.email}}</p>
         </div>
         <div class="membre-btn">
-            <button>Profil</button>
+            <RouterLink :to="{name: 'profilMembre', params: {id: props.m.id}}"><button>Profil</button></RouterLink> 
             <button>Supprimer</button>
         </div>
     </div>
