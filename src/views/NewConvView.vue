@@ -1,31 +1,31 @@
 <script setup>
-    import {useSessionStore} from '@/stores/session.js'
-    import Navbar from '@/components/Navbar.vue'
-    import {ref} from "vue";
+import {useSessionStore} from '@/stores/session.js'
+import Navbar from '@/components/Navbar.vue'
+import {ref} from "vue";
 
-    const sessionStore = new useSessionStore();
+const sessionStore = new useSessionStore();
 
-    let conv = reactive({
-        label: '',
-        topic: '',
-        token: sessionStore.data.token
-    });
+let conv = reactive({
+    label: '',
+    topic: '',
+    token: sessionStore.data.token
+});
 
-    const error = ref("");
+const error = ref("");
 
-    function addConv() {
-        api.post('channels', {
-            body: conv
-        }).then(response => {
-            if(response.message) {
-                error.value = response.message;
-            } else {
-                api.get('channels?token='+sessionStore.data.token).then(response => {
-                    console.log(response);
-                })
-            }
-        })
-    }
+function addConv() {
+    api.post('channels', {
+        body: conv
+    }).then(response => {
+        if(response.message) {
+            error.value = response.message;
+        } else {
+            api.get('channels?token='+sessionStore.data.token).then(response => {
+                console.log(response);
+            })
+        }
+    })
+}
 </script>
 
 <template>

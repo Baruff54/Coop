@@ -9,12 +9,13 @@ const router = useRouter();
 
 function deconnexion() {
 
-    let token = sessionStore.data.token
+    
     if(!userStore.isConnected) {
         router.push('/signin');
     }
     if(sessionStore.isValid())
     {
+        let token = sessionStore.data.token
         api.delete('members/signout?token=' + token).then(response => {
             if(response.message === 'Utilisateur déconnecté')
             {

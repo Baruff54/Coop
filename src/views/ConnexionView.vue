@@ -1,11 +1,11 @@
 <script setup>
 import {useSessionStore} from '@/stores/session.js'
-import Navbar from '../components/Navbar.vue'
+import Navbar from '@/components/Navbar.vue'
 import {useUserStore} from '@/stores/user.js'
 import {ref} from "vue";
 import {useRouter} from 'vue-router';
-const router = useRouter();
 
+const router = useRouter();
 const sessionStore = new useSessionStore();
 const userStore = new useUserStore();
 

@@ -2,24 +2,27 @@
 import {useSessionStore} from '@/stores/session.js'
 import {useUserStore} from '@/stores/user.js'
 import {useRouter} from 'vue-router';
-import Membre from '@/components/Membre.vue'
 import Navbar from '@/components/Navbar.vue'
 const sessionStore = new useSessionStore();
 const userStore = new useUserStore();
 const router = useRouter();
 
-let member = reactive({});
+let member = ref({})
 
 onMounted(() => {
+
     if(!userStore.isConnected) {
         router.push('/signin');
     }
     if(sessionStore.isValid())
     {
-        api.get('members/' + $route.params.id + '?token=' + sessionStore.data.token).then(response => {
-            console.log(response);
-            // member = response;
+        const id = router.currentRoute.value.params.id;
+        const token = sessionStore.data.token;
+        api.get('members?token=' + token).then(response => {
+            member.value = response.find(m => m.id === id);
+            member.value.created_at = new Date(member.value.created_at).toLocaleDateString('fr-FR', {weekday: 'long',day: 'numeric', month: 'long', year: 'numeric'})
         })
+        
     }
 
 })
@@ -28,7 +31,11 @@ onMounted(() => {
 <template>
     <Navbar />
     <div class="container">
-        <h1>Profil de Test</h1>
-        <!-- <Membre v-for="member in members" :m="member"/> -->
+        <div class="test">
+            <h1>{{member.fullname}}</h1>
+            <p>Email : {{member.email}}</p>
+            <p>Membre depuis le {{member.created_at}}</p>
+        </div>
+        
     </div>
 </template>
