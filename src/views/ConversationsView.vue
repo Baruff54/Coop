@@ -1,11 +1,13 @@
 <script setup>
 import {useSessionStore} from '@/stores/session.js'
+import {useUserStore} from '@/stores/user.js'
 import Navbar from '@/components/Navbar.vue'
 import Conversation from '@/components/Conversation.vue'
 import {ref} from "vue";
 import {useRouter} from 'vue-router';
 const router = useRouter();
 
+const userStore = new useUserStore();
 const sessionStore = new useSessionStore();
 
 let listeConv = ref([]);

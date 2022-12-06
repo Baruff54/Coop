@@ -36,8 +36,8 @@ function deconnexion() {
 <template>
   <div class="navbar">
     <ul>
-        <li><RouterLink to="/">COOP</RouterLink></li>
-        <li><RouterLink to="/conversations">Conversations</RouterLink></li>
+        <li>COOP</li>
+        <li><RouterLink to="/">Conversations</RouterLink></li>
         <li><RouterLink to="/membres">Membres</RouterLink></li>
     </ul>
 
