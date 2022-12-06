@@ -1,7 +1,5 @@
 import { defineStore } from "pinia";
-import { useUserStore } from "@/stores/user.js";
 import router from "@/router";
-// const userStore = new useUserStore();
 
 export const useSessionStore = defineStore(
   "session",
