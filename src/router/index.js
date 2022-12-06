@@ -33,6 +33,18 @@ const router = createRouter({
 
       component: () => import("@/views/ProfilMembreView.vue"),
     },
+    {
+      path: "/newConversation",
+      name: "addConv",
+
+      component: () => import("@/views/newConvView.vue"),
+    },
+    {
+      path: "/voirConversation/:id",
+      name: "conversation",
+
+      component: () => import("@/views/convView.vue"),
+    },
   ],
 });
 

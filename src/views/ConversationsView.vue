@@ -1,36 +1,29 @@
 <script setup>
-import {useSessionStore} from '@/stores/session.js'
-import {useUserStore} from '@/stores/user.js'
-import {useRouter} from 'vue-router';
-const userStore = new useUserStore();
-const sessionStore = new useSessionStore();
-const router = useRouter();
+    import {useSessionStore} from '@/stores/session.js'
+    import Navbar from '@/components/Navbar.vue'
+    import Conversation from '@/components/Conversation.vue'
+    import {ref} from "vue";
+    import {useRouter} from 'vue-router';
 
+    const sessionStore = new useSessionStore();
 
-function deconnexion() {
+    let listeConv = ref([]);
 
-    let token = {
-        "token": sessionStore.data.token
-    }
-    
-    api.delete('members/signout', {
-        body: token
-    }).then(response => {
-        if(response.message === 'Utilisateur déconnecté')
-        {
-            localStorage.removeItem('session');
-            userStore.disconnect();
-            router.push('/signin');
-        }
-        else
-        {
-            alert(response.message);
-        }
-        
-    })
-    
-}
+    onMounted(() => {
+        api.get('channels?token='+sessionStore.data.token).then(response => {
+            listeConv.value = response;
+            console.log(response);
+        });
+    });
 </script>
-<template>
 
+<template>
+    <Navbar/>
+    <h1>Liste des Conversations</h1>
+
+    <p class="subtitle">
+      <router-link to="/newConversation">Créer une nouvelle conversation</router-link>
+    </p>
+
+    <Conversation v-for="uneConv in listeConv" :c="uneConv"/>
 </template>
