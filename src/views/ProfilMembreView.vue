@@ -7,7 +7,9 @@ const sessionStore = new useSessionStore();
 const userStore = new useUserStore();
 const router = useRouter();
 
-let member = ref({})
+let data = reactive({
+    member: {}
+})
 
 onMounted(() => {
 
@@ -19,8 +21,8 @@ onMounted(() => {
         const id = router.currentRoute.value.params.id;
         const token = sessionStore.data.token;
         api.get('members?token=' + token).then(response => {
-            member.value = response.find(m => m.id === id);
-            member.value.created_at = new Date(member.value.created_at).toLocaleDateString('fr-FR', {weekday: 'long',day: 'numeric', month: 'long', year: 'numeric'})
+            data.member = response.find(m => m.id === id);
+            data.member.created_at = new Date(data.member.created_at).toLocaleDateString('fr-FR', {weekday: 'long',day: 'numeric', month: 'long', year: 'numeric'})
         })
         
     }
@@ -32,9 +34,9 @@ onMounted(() => {
     <Navbar />
     <div class="container">
         <div class="test">
-            <h1>{{member.fullname}}</h1>
-            <p>Email : {{member.email}}</p>
-            <p>Membre depuis le {{member.created_at}}</p>
+            <h1>{{data.member.fullname}}</h1>
+            <p>Email : {{data.member.email}}</p>
+            <p>Membre depuis le {{data.member.created_at}}</p>
         </div>
         
     </div>
