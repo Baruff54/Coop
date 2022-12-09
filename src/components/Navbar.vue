@@ -58,14 +58,15 @@ function deconnexion() {
 <style scoped>
 .navbar {
     display: flex;
-    background-color: #333;
+    background-color: #141432;
     padding: 3em;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar > a {
-    color: #f1f1f1;
+    color: #f77017;
     font-weight: bold;
     text-decoration: none;
     font-size: 2rem;
@@ -78,26 +79,35 @@ function deconnexion() {
 }
 .navbar > .navbar-links > ul > li:not(:last-child) {
     margin-right: 4em;
-    font-size: 1.1rem;
 }
 
 .navbar > .navbar-links > ul > li > a {
-    color: #f1f1f1;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar > .navbar-links > ul > li:hover > a {
+    color: #f77017;
 }
 
 .navbar > .navbar-links > ul > li:active > a {
-    font-weight: bold;
-    color: rgb(241, 41, 41);
+    color: #f77017;
 }
 .navbar > .navbar-links > ul > .deconnexion {
-    padding: 0.7em;
-    background: none;
+    padding: 0.8em;
+    background: #1d1d42;
     border-radius: 5px;
-    color: #f1f1f1;
-    border: 1px solid #f1f1f1;
+    border: 2px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
+    font-weight: bold;
     font-size: 1.1rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar > .navbar-links > ul > .deconnexion:hover {
+    color: #f77017;
 }
 
 .hamburger {
@@ -167,7 +177,7 @@ function deconnexion() {
         position: absolute;
         top:0;
         left: 0;
-        background-color: #333;
+        background-color: #141432;
         backdrop-filter: blur(7px);
         width: 100%;
         height: 100vh;
@@ -176,7 +186,7 @@ function deconnexion() {
         align-items: center;
         transform: translateX(-100%);
         transition: transform 0.5s ease;
-    }
+    } 
 
     .navbar > .navbar-links.active {
         
@@ -189,9 +199,17 @@ function deconnexion() {
     }
 
     .navbar > .navbar-links > ul > li:not(:last-child) {
-    margin-bottom: 2em;
-    margin-right: 0;
-}
+        margin-bottom: 5em;
+        margin-right: 0;  
+    }   
+
+    .navbar > .navbar-links > ul > .deconnexion {
+        font-size: 1.5rem;
+    }
+
+    .navbar > .navbar-links > ul > li > a {
+        font-size: 1.5rem;
+    }
 
     .hamburger {
         display: block;
