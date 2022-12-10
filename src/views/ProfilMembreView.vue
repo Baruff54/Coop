@@ -33,7 +33,8 @@ onMounted(() => {
 <template>
     <Navbar />
     <div class="container">
-        <div class="test">
+        <h1>Profil</h1>
+        <div class="profil">
             <h1>{{data.member.fullname}}</h1>
             <p>Email : {{data.member.email}}</p>
             <p>Membre depuis le {{data.member.created_at}}</p>
@@ -41,3 +42,19 @@ onMounted(() => {
         
     </div>
 </template>
+
+<style scoped>
+
+.profil {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20em;
+    width: 22em;
+    background: #1d1d42;
+    border-radius: 15px;
+    box-shadow: -1rem 0 2rem #000;
+    padding: 2em;
+    margin: 0 auto;
+}
+</style>
