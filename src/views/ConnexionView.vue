@@ -54,16 +54,6 @@ function connexion() {
 </template>
 
 <style scoped>
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 8em;
-}
-
-.container > h1 {
-    margin-bottom: 2em;
-}
 
 .container > form {
     display: flex;
@@ -86,6 +76,7 @@ function connexion() {
     margin-bottom: 3em;
     font-size: 1rem;
     transition: border-color 0.3s ease-in-out;
+    color: #333;
 }
 
 .container > form > input:focus {
@@ -97,9 +88,9 @@ function connexion() {
     background: #1d1d42;
     width: 10em;
     border: 2px solid rgba(255, 255, 255, 0.1);
-    transition: 0.4s linear;
     cursor: pointer;
     transition: border-color 0.3s ease-in-out;
+    color: #f1f1f1;
 
 }
 

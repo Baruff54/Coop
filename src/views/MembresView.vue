@@ -29,6 +29,26 @@ onMounted(() => {
     <Navbar />
     <div class="container">
         <h1>Liste des membres</h1>
-        <Membre v-for="member in members" :m="member"/>
+        <div class="membres">
+            <Membre v-for="member in members" :m="member"/>
+        </div>
     </div>
 </template>
+
+<style scoped>
+
+.container > .membres {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 750px) {
+    .container > .membres {
+        flex-direction: column;
+        align-items: center;
+        gap: 3em;
+    }
+}
+
+</style>

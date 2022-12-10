@@ -14,3 +14,42 @@ const props = defineProps(['m'])
         </div>
     </div>
 </template>
+
+<style scoped>
+
+.membre {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20em;
+    width: 20em;
+    background: #1d1d42;
+    border-radius: 15px;
+    box-shadow: -1rem 0 2rem #000;
+}
+
+.membre > .membre-information > h2 {
+    margin-bottom: 1em;
+}
+
+.membre > .membre-information + .membre-btn {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.membre > .membre-information + .membre-btn button {
+    color: #f1f1f1;
+    padding: 0.7em;
+    width: 8em;
+    font-weight: bold;
+    background-color: #141432;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: border-color 0.3s ease-in-out;
+}
+
+.membre > .membre-information + .membre-btn button:hover {
+    border-color: #f77017;
+}
+</style>
