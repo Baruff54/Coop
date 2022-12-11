@@ -21,11 +21,18 @@ const props = defineProps(['m'])
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     height: 20em;
     width: 20em;
     background: #1d1d42;
     border-radius: 15px;
     box-shadow: -1rem 0 2rem #000;
+}
+
+.membre > .membre-information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .membre > .membre-information > h2 {
@@ -35,6 +42,7 @@ const props = defineProps(['m'])
 .membre > .membre-information + .membre-btn {
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
 }
 
 .membre > .membre-information + .membre-btn button {

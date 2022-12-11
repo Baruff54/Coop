@@ -45,7 +45,8 @@ function deconnexion() {
     <div class="navbar-links" :class="{active: isActive}">
         <ul>
             <li @click="menuToggle"><RouterLink to="/">Conversations</RouterLink></li>
-            <li @click="menuToggle"><RouterLink to="/membres">Membres</RouterLink></li>           
+            <li @click="menuToggle"><RouterLink to="/membres">Membres</RouterLink></li>
+            <li @click="menuToggle" v-if="!userStore.isConnected"><RouterLink to="/signup">Inscription</RouterLink></li>         
             <button class="deconnexion" v-if="userStore.isConnected" @click="deconnexion(); menuToggle();">Se déconnecter</button>
         </ul>
     </div>
