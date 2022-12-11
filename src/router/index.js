@@ -37,7 +37,7 @@ const router = createRouter({
       path: "/newConversation",
       name: "addConv",
 
-      component: () => import("@/views/newConvView.vue"),
+      component: () => import("@/views/NewConvView.vue"),
     },
     {
       path: "/voirConversation/:id",

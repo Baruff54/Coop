@@ -72,7 +72,6 @@ onMounted(() => {
     .container > .conversations {
         flex-direction: column;
         align-items: center;
-        gap: 3em;
     }
 
     .container > .subtitle {

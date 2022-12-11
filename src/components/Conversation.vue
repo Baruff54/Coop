@@ -29,6 +29,7 @@ const props = defineProps(['c']);
     background: #1d1d42;
     border-radius: 15px;
     box-shadow: -1rem 0 2rem #000;
+    margin-bottom: 3em;
 }
 
 .conversation > .conversation-info{
@@ -39,6 +40,7 @@ const props = defineProps(['c']);
 
 .conversation > .conversation-info > h2 {
     margin-bottom: 1em;
+    text-align: center;
 }
 
 </style>

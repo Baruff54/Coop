@@ -61,7 +61,7 @@ function connexion() {
     flex-direction: column;
 }
 
-.container > form > div > p {
+.container > form > div > .form-error {
     color: #f77017;
     font-weight: bold;
 }
@@ -97,8 +97,5 @@ function connexion() {
 .container > form > .btn:hover{
     border-color: #f77017;
 }
-
-
-
 
 </style>
