@@ -30,6 +30,7 @@ const props = defineProps(['c']);
     border-radius: 15px;
     box-shadow: -1rem 0 2rem #000;
     margin-bottom: 3em;
+    padding: 10px;
 }
 
 .conversation > .conversation-info{

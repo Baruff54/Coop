@@ -31,7 +31,7 @@ onMounted(() => {
     if(sessionStore.isValid())
     {
         api.get('channels/'+id_channel+'/posts?token='+sessionStore.data.token).then(response => {
-            listeMessages.value = response;
+            listeMessages.value = response.sort(messageSorting);
         });
 
         api.get('channels?token='+sessionStore.data.token).then(response => {
@@ -41,15 +41,23 @@ onMounted(() => {
 
 });
 
+function messageSorting(a,b) {
+    var dateA = new Date(a.date).getTime();
+    var dateB = new Date(b.date).getTime();
+    return dateA > dateB ? 1 : -1; 
+}
+
 function sendMessage() {
     api.post('channels/'+id_channel+'/posts', {
         body: data
     }).then(response => {
         if(response.message) {
-            console.log(response.message)
+            api.get('channels/'+id_channel+'/posts?token='+sessionStore.data.token).then(response => {
+            listeMessages.value = response.sort(messageSorting);
+        });
         }
         else {
-            console.log(response);
+            alert(response)
         }
     })
 }
@@ -80,7 +88,7 @@ function sendMessage() {
 }
 .container > .messages {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 3em;
 }
