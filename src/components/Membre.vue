@@ -1,5 +1,6 @@
 <script setup>
-const props = defineProps(['m'])
+const props = defineProps(['m']);
+const sessionStore = new useSessionStore();
 </script>
 
 <template>
@@ -10,7 +11,8 @@ const props = defineProps(['m'])
         </div>
         <div class="membre-btn">
             <RouterLink :to="{name: 'profilMembre', params: {id: props.m.id}}"><button>Profil</button></RouterLink> 
-            <button>Supprimer</button>
+            
+            <button v-if="(props.m.id != sessionStore.data.member.id)">Supprimer</button>
         </div>
     </div>
 </template>
