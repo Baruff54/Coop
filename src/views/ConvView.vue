@@ -8,6 +8,7 @@ import Message from '../components/Message.vue';
 const router = useRouter();
 const userStore = new useUserStore();
 const sessionStore = new useSessionStore();
+const bus = inject('bus');
 
 const id_channel = router.currentRoute.value.params.id;
 
@@ -21,6 +22,24 @@ let data = reactive({
 let listeMessages = ref([]);
 let conv = ref({})
 
+bus.on('recharger-messages', chargerMessages);
+
+async function chargerMessages() {  
+        const response = await api.get('channels/'+id_channel+'/posts?token='+sessionStore.data.token);
+        listeMessages.value = response.reverse();
+        setTimeout(() => bus.emit('fin-recharger-messages'), 10); 
+    
+    
+}
+
+async function chargerConversation() {
+
+    if(sessionStore.isValid())
+    {   
+        const response = await api.get('channels?token='+sessionStore.data.token);
+        conv.value = response.find(c => c.id === id_channel);
+    }
+}
 
 
 onMounted(() => {
@@ -28,15 +47,9 @@ onMounted(() => {
     if(!userStore.isConnected) {
         router.push('/signin');
     }
-    if(sessionStore.isValid())
-    {
-        api.get('channels/'+id_channel+'/posts?token='+sessionStore.data.token).then(response => {
-            listeMessages.value = response.sort(messageSorting);
-        });
-
-        api.get('channels?token='+sessionStore.data.token).then(response => {
-            conv.value = response.find(c => c.id === id_channel);
-        })
+    else {
+        chargerConversation();
+        chargerMessages();
     }
 
 });
@@ -51,14 +64,13 @@ function sendMessage() {
     api.post('channels/'+id_channel+'/posts', {
         body: data
     }).then(response => {
-        if(response.message) {
-            api.get('channels/'+id_channel+'/posts?token='+sessionStore.data.token).then(response => {
-            listeMessages.value = response.sort(messageSorting);
+        data.message = "";
+        console.log(response)
+        bus.emit('recharger-messages');
+        bus.off('fin-recharger-messages');
+        bus.on('fin-recharger-messages',() => {
+            bus.emit(`defiler-message`, response.id);
         });
-        }
-        else {
-            alert(response)
-        }
     })
 }
 </script>

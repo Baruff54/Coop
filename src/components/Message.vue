@@ -14,8 +14,10 @@ onMounted(() => {
     const id = props.m.member_id;
     const token = sessionStore.data.token;
     api.get('members?token=' + token).then(response => {
+        
         data.member = response.find(m => m.id === id);
     })
+    
     props.m.created_at = new Date(props.m.created_at).toLocaleDateString('fr-FR', {weekday: 'long',day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second:'numeric'})
 
 })

@@ -10,7 +10,7 @@ const props = defineProps(['c']);
             <p>{{c.modified_at}}</p>
         </div>
         <div class="conversation-action">
-            <router-link :to="{name: 'conversation', params: {id: c.id}}">Voir la conversation</router-link>
+            <RouterLink :to="{name: 'conversation', params: {id: c.id}}">Voir la conversation</RouterLink>
         </div>
     </div>
 </template>
