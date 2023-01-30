@@ -1,10 +1,35 @@
 <script setup>
+import {useRouter} from 'vue-router';
 const props = defineProps(['m']);
 const sessionStore = new useSessionStore();
+const router = useRouter();
+const state = reactive({
+    active : true
+});
+
+function deleteMembre(id) {
+    let token = sessionStore.data.token
+    api.get('channels?token=' + token).then(channels => {
+        channels.forEach(channel => {
+            api.get('channels/'+channel.id+'/posts?token=' + token).then(messages => {
+                messages.forEach(message => {
+                    if(message.member_id === id) {
+                        api.delete('channels/' + channel.id + '/posts/' + message.id + '?token=' + token).then(() => {
+                            console.log("Le message '"+message.message+"' viens d'être supprimé.");
+                        });
+                    }
+                });
+            });
+        });
+    });
+    api.delete('members/'+id+'?token=' + token).then(response => {
+        state.active = false;
+    });
+}
 </script>
 
 <template>
-    <div class="membre">
+    <div v-if="state.active" class="membre">
         <div class="membre-information">
             <h2>{{props.m.fullname}}</h2>
             <p>{{props.m.email}}</p>
@@ -12,7 +37,7 @@ const sessionStore = new useSessionStore();
         <div class="membre-btn">
             <RouterLink :to="{name: 'profilMembre', params: {id: props.m.id}}"><button>Profil</button></RouterLink> 
             
-            <button v-if="(props.m.id != sessionStore.data.member.id)">Supprimer</button>
+            <button v-if="(props.m.id != sessionStore.data.member.id)" @click="deleteMembre(props.m.id)">Supprimer</button>
         </div>
     </div>
 </template>
