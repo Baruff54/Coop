@@ -27,9 +27,7 @@ bus.on('recharger-messages', chargerMessages);
 async function chargerMessages() {  
         const response = await api.get('channels/'+id_channel+'/posts?token='+sessionStore.data.token);
         listeMessages.value = response.reverse();
-        setTimeout(() => bus.emit('fin-recharger-messages'), 10); 
-    
-    
+        setTimeout(() => bus.emit('fin-recharger-messages'), 1000);  
 }
 
 async function chargerConversation() {
@@ -54,18 +52,11 @@ onMounted(() => {
 
 });
 
-function messageSorting(a,b) {
-    var dateA = new Date(a.date).getTime();
-    var dateB = new Date(b.date).getTime();
-    return dateA > dateB ? 1 : -1; 
-}
-
 function sendMessage() {
     api.post('channels/'+id_channel+'/posts', {
         body: data
     }).then(response => {
         data.message = "";
-        console.log(response)
         bus.emit('recharger-messages');
         bus.off('fin-recharger-messages');
         bus.on('fin-recharger-messages',() => {
